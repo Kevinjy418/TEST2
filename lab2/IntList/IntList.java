@@ -46,6 +46,10 @@ public class IntList {
         }
     }
 
+    public int getFirst() {
+        return first;
+    }
+
     /**
      * Method to create an IntList from an argument list.
      * You don't have to understand this code. We have it here

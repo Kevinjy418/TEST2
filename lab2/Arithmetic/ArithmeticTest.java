@@ -1,7 +1,6 @@
-package Arithmetic;
-
 import static org.junit.Assert.*;
 import org.junit.Test;
+import Arithmetic.Arithmetic;
 
 public class ArithmeticTest {
 
