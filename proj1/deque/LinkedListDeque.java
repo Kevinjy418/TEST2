@@ -1,6 +1,6 @@
 package deque;
 
-public class LinkedListDeque<horse> {
+public class LinkedListDeque<horse> implements Deque<horse> {
     private int size;
     private IntNode sentinelf;
     private IntNode sentinelb;
@@ -36,14 +36,6 @@ public class LinkedListDeque<horse> {
         IntNode n = new IntNode(sentinelb.prev, T, sentinelb);
         sentinelb.prev.next = n;
         sentinelb.prev = n;
-    }
-    public boolean isEmpty(){
-        if (sentinelf.next == sentinelb){
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 
     public int size(){
