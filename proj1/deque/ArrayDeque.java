@@ -6,6 +6,25 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private int size;
     private int next_First;
     private int next_Last;
+
+    public class ArrayDequeIterator implements Iterator<T>{
+        private int wizpos;
+
+        private ArrayDequeIterator(){
+            wizpos = 0;
+        }
+        @Override
+        public boolean hasNext(){
+            return wizpos < size;
+        }
+        @Override
+        public T next(){
+            T item = items[wizpos];
+            wizpos ++;
+            return item;
+        }
+    }
+
     public ArrayDeque(){
         items = (T[]) new Object[8];
         size = 0;
@@ -88,23 +107,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return new ArrayDequeIterator();
     }
 
-    public class ArrayDequeIterator implements Iterator<T>{
-        private int wizpos;
 
-        private ArrayDequeIterator(){
-            wizpos = 0;
-        }
-
-        public boolean hasNext(){
-            return wizpos < size;
-        }
-
-        public T next(){
-            T item = items[wizpos];
-            wizpos ++;
-            return item;
-        }
-    }
 
     public boolean equals(Object o){
         if (this == o) {
