@@ -113,56 +113,17 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
-        board.setViewingPerspective(side);
-        for (int i = 0; i < 4; i ++){
-            for (int j = 3; j >= 0; j --){/* j represent the subject of the current */
-                int new_j = j;
-                if (is_null(i, j)){
-                    continue;
-                }
-                int score_current = board.tile(i, j).value();
-                boolean result = false;
-                /*empty ahead*/
-                if (j != 3){
-                    for (int k = 3; k > j; k --){
-                        if(is_null(i, k)){
-                            Tile t = board.tile(i, j);
-                            board.move(i, k, t);
-                            new_j = k;
-                            result = true;
-                            break;
-                        }
-                    }
-                }
-                for (int k = new_j - 1; k >= 0; k --){/* k represent the object*/
-                    if (is_null(i, k)){
-                        continue;
-                    }
-                    if (! is_null(i, new_j) && board.tile(i, new_j).value() == board.tile(i, k).value()){
-                        board.move(i, new_j, board.tile(i, k));
-                        score += 2 * score_current;
-                        /* I assume that the move() has doubled it */
-                        changed = true;
-                        break;
-                    }
-                }
-                if (result){
-                    changed = true;
-                }
-            }
-        }
+
         checkGameOver();
         if (changed) {
             setChanged();
         }
-        board.setViewingPerspective(Side.NORTH);
         return changed;
     }
 
     /** Checks if the game is over and sets the gameOver variable
      *  appropriately.
      */
-
     private void checkGameOver() {
         gameOver = checkGameOver(board);
     }
@@ -171,40 +132,11 @@ public class Model extends Observable {
     private static boolean checkGameOver(Board b) {
         return maxTileExists(b) || !atLeastOneMoveExists(b);
     }
-    public boolean is_null(int i, int j) {
-        Tile t = board.tile(i, j);
-        if (t != null){
-            return false;
-        }
-        return true;
-    }
-    /*judge if the tile have any empty tile ahead and move */
-    public boolean empty_ahead(int i, int j) {
-        if (j != 3){
-            for (int k = 3; k > j; k --){
-                if(is_null(i, k)){
-                    Tile t = board.tile(i, j);
-                    board.move(i, k, t);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+
     /** Returns true if at least one space on the Board is empty.
      *  Empty spaces are stored as null.
      * */
-
     public static boolean emptySpaceExists(Board b) {
-        int size = b.size();
-        for (int i = 0; i < size ; i += 1){
-            for (int j = 0; j < size; j += 1){
-                if (b.tile(i, j) == null){
-                    return true;
-                }
-            }
-        }
-
         // TODO: Fill in this function.
         return false;
     }
@@ -216,14 +148,6 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
-        int size = b.size();
-        for (int i = 0; i < size ; i += 1){
-            for (int j = 0; j < size; j += 1){
-                if (b.tile(i,j) != null && b.tile(i, j).value() == MAX_PIECE){
-                    return true;
-                }
-            }
-        }
         return false;
     }
 
@@ -235,32 +159,9 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
-        int size = b.size();
-        int [][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-        if (emptySpaceExists(b)){
-            return true;
-        }
-        for (int i = 0; i < 4; i ++){
-            for (int j = 0; j < 4; j ++){
-                for (int t = 0; t < 4; t ++){
-                    int col = directions[t][1] + i;
-                    int row = directions[t][0] + j;
-                    if(borderjudge(row) && borderjudge(col)){
-                        if (b.tile(i,j).value() == b.tile(col, row).value()) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
         return false;
     }
-    public static boolean borderjudge(int rc) {
-        if (rc < 0 || rc >= 4){
-            return false;
-        }
-        return true;
-    }
+
 
     @Override
      /** Returns the model as a string, used for debugging. */
