@@ -6,9 +6,9 @@ import java.io.Serializable;
 import static capers.Utils.*;
 
 /** Represents a dog that can be serialized.
- * @author TODO
+ * @author Kevin
 */
-public class Dog implements Serializable{ // TODO
+public class Dog implements Serializable{
 
     /** Folder that dogs live in. */
     static final File DOG_FOLDER = join(".capers", "dogs"); // TODO (hint: look at the `join`
@@ -39,7 +39,6 @@ public class Dog implements Serializable{ // TODO
      * @return Dog read from file
      */
     public static Dog fromFile(String name) {
-        // TODO (hint: look at the Utils file)
         Dog dog;
         File readFile = join(DOG_FOLDER, name);
         dog = readObject(readFile, Dog.class);
@@ -59,8 +58,6 @@ public class Dog implements Serializable{ // TODO
      * Saves a dog to a file for future use.
      */
     public void saveDog() {
-        // TODO (hint: don't forget dog names are unique)
-        // creat a file room for the dog
         File saveFile = join(DOG_FOLDER, this.name);
         if (!saveFile.exists()){
             try{
@@ -69,7 +66,7 @@ public class Dog implements Serializable{ // TODO
                 throw new IllegalArgumentException(excp.getMessage());
             }
         }
-        writeContents(saveFile, this);
+        writeObject(saveFile, this);
     }
 
     @Override
