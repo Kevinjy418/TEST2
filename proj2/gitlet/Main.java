@@ -13,12 +13,17 @@ public class Main {
         String firstArg = args[0];
         switch(firstArg) {
             case "init":
-                // TODO: handle the `init` command
+                //one commit with "initial commit"
+                //
+                //set master as curr branch"
+
                 break;
             case "add":
                 // TODO: handle the `add [filename]` command
                 break;
             // TODO: FILL THE REST IN
+            case "commit":
+                break;
         }
     }
 }

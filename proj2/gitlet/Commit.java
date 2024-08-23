@@ -21,6 +21,9 @@ public class Commit {
 
     /** The message of this Commit. */
     private String message;
+    private String logMessage;
+    private String timestamp;
+    private String namesMap;
 
     /* TODO: fill in the rest of this class. */
 }
