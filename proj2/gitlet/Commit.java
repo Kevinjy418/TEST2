@@ -24,6 +24,14 @@ public class Commit {
     private String logMessage;
     private String timestamp;
     private String namesMap;
+    private String parentName; //hashName of parent
+    private String hashName;
 
     /* TODO: fill in the rest of this class. */
+
+    public Commit(String message, String parent, String timestamp){
+        this.message = message;
+        this.parentName = parent;
+        this.timestamp = timestamp;
+    }
 }

@@ -26,4 +26,12 @@ public class Repository {
     public static final File GITLET_DIR = join(CWD, ".gitlet");
 
     /* TODO: fill in the rest of this class. */
+    public static void setupRepo() {
+        GITLET_DIR.mkdir();
+        StagingArea.STAGE_FOLDER.mkdir();
+        Blob.BLOB_DIR.mkdir();
+
+    }
+
+
 }
