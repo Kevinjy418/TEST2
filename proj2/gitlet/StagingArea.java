@@ -42,27 +42,29 @@ public class StagingArea {
     public static void Add_overwrite(String Work_Towrite_name){
         overwrite(Work_Towrite_name, Addition);
     }
-    //overwrite "Staged to write" with "Work towrite"
+    //overwrite "Staged towrite" with "Work towrite"
     public static void overwrite(String Work_towrite_name , File AddorRem){
         File Stage_towrite_File = join(AddorRem, Work_towrite_name);
         File Work_towrite_File = join(Repository.CWD, Work_towrite_name);
         String Work_towrite_content = readContentsAsString(Work_towrite_File);
         Blob blob = new Blob(sha1(Work_towrite_File), Work_towrite_content);
         //overwrite. Will method "writeContents" delete the current content??
-        writeContents(Stage_towrite_File, Work_towrite_content);
+        writeContents(Stage_towrite_File, blob.getHashName());
+        
     }
 
 
     public static void Add_SaveFile(String NametoSave){
-        SaveFile(NametoSave, Addition);
+        StagedFile(NametoSave, Addition);
     }
 
     //Give it a Blob and File, record Blob.hashName in File.
-    public static void SaveFile(String NametoSave, File AddorRem){
+    public static void StagedFile(String NametoSave, File AddorRem){
         File toStaged = join(AddorRem, NametoSave);
         File Work = join(Repository.CWD, NametoSave);
         String contentToSave = readContentsAsString(Work);
         Blob blob = new Blob(sha1(Work), contentToSave);
+        //Link new_blob with new_added_file
         writeContents(toStaged, blob.getHashName());
     }
 

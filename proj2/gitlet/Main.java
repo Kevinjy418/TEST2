@@ -37,6 +37,7 @@ public class Main {
         String message = args[1];
         File CWD = new File(System.getProperty("user.dir"));
         Commit initial = new Commit(message, null, "00:00:00 UTC, Thursday, 1 January 1970");
+        initial.AssignHashName();
     }
 
     /**
@@ -53,6 +54,12 @@ public class Main {
         //check if File in "stage" == "be tracked"
         //copy
         String toAdd = args[1];
+        File toAddFile = join(Repository.CWD, toAdd);
+        //Failure case
+        if(! toAddFile.exists()){
+            System.out.println("File does not exist");
+            return;
+        }
         //if toAdd has been in stage
         if(StagingArea.Add_is_exist(toAdd)){
             //check if "been" same?
@@ -61,7 +68,7 @@ public class Main {
             }
             // else -> overwrite
             else{
-                StagingArea.overwrite(toAdd);
+                StagingArea.Add_overwrite(toAdd);
             }
         }
         else{
@@ -72,10 +79,26 @@ public class Main {
         //
     }
 
+
     public static void commit(String [] args) {
-        //copy the parent
+        //clone the parent ->new_commit
+        Commit new_commit = new Commit()
         //change metadata
-        //record the "point" between "blob" and "txt"
+        //look up stagingArea, change link blob -- name.txt
         //clean the staged area
+        //denote who is the parent of new_commit
+        //advance the Head and Branch
+    }
+
+    public static void rm(String [] args) {
+        File toRemove = join(Repository.CWD, args[2]);
+        //if in adding
+        //if in curr_commit
+          //stage it in "Staging_removing"
+          //remove it from CWD
+    }
+
+    public static void log(String [] args) {
+
     }
 }
