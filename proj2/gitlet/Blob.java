@@ -20,6 +20,7 @@ public class Blob implements Serializable {
     }
 
     public void SaveBlob(Blob blob_toSave){
+        //hello
         //create File to save blob
         //name in hash
         File File_toSaveIn = join(BLOB_FOLDER, blob_toSave.hashName);
